@@ -46,7 +46,7 @@ osx: all
 
 # ===============================================================
 
-SRCS	= main.cpp matrix.cpp camera.cpp glCanvas.cpp mesh.cpp edge.cpp radiosity.cpp face.cpp raytree.cpp raytracer.cpp sphere.cpp material.cpp image.cpp
+SRCS	= main.cpp matrix.cpp camera.cpp mesh.cpp edge.cpp face.cpp raytree.cpp raytracer.cpp sphere.cpp material.cpp image.cpp
 OBJS	= $(SRCS:.cpp=.o)
 EXE	= render
 

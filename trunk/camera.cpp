@@ -1,17 +1,6 @@
 #include <math.h>
 #include <assert.h>
 
-// Included files for OpenGL Rendering
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
-#else
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#endif
-
 #include "camera.h"
 #include "matrix.h"
 
@@ -39,12 +28,9 @@ PerspectiveCamera::PerspectiveCamera(Vec3f &c, Vec3f &p, Vec3f &u, double a) : C
 void PerspectiveCamera::glInit(int w, int h) {
   width = w;
   height = h;
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
   double aspect = double(width)/double(height);
   double asp_angle = angle * 180/M_PI;
   if (aspect > 1) asp_angle /= aspect;
-  gluPerspective(asp_angle, aspect, 1, 1000.0);
 }
 
 // ====================================================================
@@ -54,9 +40,9 @@ void PerspectiveCamera::glInit(int w, int h) {
 
 void Camera::glPlaceCamera(void) {
   Vec3f lookAt = camera_position + getDirection();
-  gluLookAt(camera_position.x(), camera_position.y(), camera_position.z(),
+  /*gluLookAt(camera_position.x(), camera_position.y(), camera_position.z(),
             point_of_interest.x(), point_of_interest.y(), point_of_interest.z(),
-            up.x(), up.y(), up.z());
+            up.x(), up.y(), up.z());*/
 }
 
 // ====================================================================

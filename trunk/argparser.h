@@ -70,6 +70,24 @@ public:
          ambient_light = Vec3f(r,g,b);
          ambient_light_linear = 
 	   Vec3f(srgb_to_linear(r),srgb_to_linear(g),srgb_to_linear(b));
+      } else if (!strcmp(argv[i],"-poi")) {
+	i++; assert (i < argc);
+         double x = atof(argv[i]);
+         i++; assert (i < argc);
+         double y = atof(argv[i]);
+         i++; assert (i < argc);
+         double z = atof(argv[i]);
+	 // ambient color input is assumed to be sRGB
+         poi = Vec3f(x,y,z);
+      } else if (!strcmp(argv[i],"-camera_position")) {
+	i++; assert (i < argc);
+         double x = atof(argv[i]);
+         i++; assert (i < argc);
+         double y = atof(argv[i]);
+         i++; assert (i < argc);
+         double z = atof(argv[i]);
+	 // ambient color input is assumed to be sRGB
+         camera_position = Vec3f(x,y,z);
       } else {
 	printf ("whoops error with command line argument %d: '%s'\n",i,argv[i]);
 	assert(0);
@@ -100,6 +118,8 @@ public:
       Vec3f(srgb_to_linear(ambient_light.r()),
 	    srgb_to_linear(ambient_light.g()),
 	    srgb_to_linear(ambient_light.b()));
+    camera_position = Vec3f(0,2,10);
+    poi = Vec3f(0,0,0);
   }
 
   // ==============
@@ -130,6 +150,9 @@ public:
   int sphere_vert;
 
   bool intersect_backfacing;
+  
+  Vec3f camera_position;
+  Vec3f poi;
 
 };
 

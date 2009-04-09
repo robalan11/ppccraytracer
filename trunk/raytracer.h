@@ -2,14 +2,15 @@
 #define _RAY_TRACER_
 
 #include <assert.h>
+#include "argparser.h"
 #include "ray.h"
 #include "hit.h"
+#include "camera.h"
 
 #include <vector>
 
 class Mesh;
 class ArgParser;
-class Radiosity;
 
 // ====================================================================
 // ====================================================================
@@ -19,12 +20,20 @@ class RayTracer {
 public:
 
   // CONSTRUCTOR & DESTRUCTOR
-  RayTracer(Mesh *m, ArgParser *a) {
+  RayTracer(Mesh *m, ArgParser *a, Camera *c) {
     mesh = m;
     args = a;
+    camera = c;
+    raytracing_x = 0.5;
+    raytracing_y = 0.5;
+    raytracing_skip = 1;
+    image = (double*)malloc(args->width * args->height * 3 * sizeof(double));
   }  
   ~RayTracer() {}
-  void setRadiosity(Radiosity *r) { radiosity = r; }
+  
+  void TraceRays();
+  Vec3f SetupRay(double i, double j);
+  int DrawPixel();
   
   // casts a single ray through the scene geometry and finds the closest hit
   bool CastRay(Ray &ray, Hit &h, bool use_sphere_patches) const;
@@ -39,7 +48,11 @@ private:
   // REPRESENTATION
   Mesh *mesh;
   ArgParser *args;
-  Radiosity *radiosity;
+  Camera* camera;
+  double raytracing_x;
+  double raytracing_y;
+  int raytracing_skip;
+  double* image;
 };
 
 // ====================================================================
