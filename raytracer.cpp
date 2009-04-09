@@ -2,14 +2,62 @@
 #include "material.h"
 #include "vectors.h"
 #include "argparser.h"
-#include "raytree.h"
 #include "utils.h"
 #include "mesh.h"
 #include "face.h"
 #include "sphere.h"
 
 #include "math.h"
+#include <iostream>
+#include <fstream>
 
+void RayTracer::TraceRays() {
+    while(DrawPixel()) ;
+    ofstream output;
+    output.open("out.ppm");
+    output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
+    cout << "Calculation complete.  Outputting file..." << endl;
+    for (int i = 0; i < args->width * args->height * 3 - 1; i++) {
+        output << image[i] << endl;
+    }
+}
+
+Vec3f RayTracer::SetupRay(double i, double j) {
+  // compute and set the pixel color
+  int max_d = max2(args->width,args->height);
+  double x = (i+0.5-args->width/2.0)/double(max_d)+0.5;
+  double y = (j+0.5-args->height/2.0)/double(max_d)+0.5;
+  Vec2f point(x,y);
+  Ray r = camera->generateRay(Vec2f(x,y));
+  Hit hit;
+  Vec3f color = TraceRay(r,hit);
+  return color;
+}
+
+int RayTracer::DrawPixel() {
+  if (raytracing_x > args->width) {
+    raytracing_x = raytracing_skip/2;
+    raytracing_y += raytracing_skip;
+  }
+  if (raytracing_y > args->height) {
+    if (raytracing_skip == 1) return 0;
+    raytracing_skip = raytracing_skip / 2;
+    if (raytracing_skip % 2 == 0) raytracing_skip++;
+    assert (raytracing_skip >= 1);
+    raytracing_x = raytracing_skip/2;
+    raytracing_y = raytracing_skip/2;
+  }
+
+  // compute the color and position of intersection
+  Vec3f color = SetupRay(raytracing_x, raytracing_y);
+  int x = raytracing_x - 0.5;
+  int y = raytracing_y - 0.5;
+  image[3*x + 3*args->width*(args->height-y-1) + 0] = color.x()*255;
+  image[3*x + 3*args->width*(args->height-y-1) + 1] = color.y()*255;
+  image[3*x + 3*args->width*(args->height-y-1) + 2] = color.z()*255;
+  raytracing_x += raytracing_skip;
+  return 1;
+}
 
 // casts a single ray through the scene geometry and finds the closest hit
 bool RayTracer::CastRay(Ray &ray, Hit &h, bool use_sphere_patches) const {
@@ -109,7 +157,6 @@ Vec3f RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
                     Hit shadowHit;
                     
                     CastRay(shadowRay, shadowHit, false);
-                    RayTree::AddShadowSegment(shadowRay, 0, shadowHit.getT());
                     if (shadowHit.getMaterial()->getEmittedColor().Length() > 0.001) numhits++;
                 }
                 
@@ -140,7 +187,6 @@ Vec3f RayTracer::TraceRay(Ray &ray, Hit &hit, int bounce_count) const {
                         Ray glosray(point, glosdir);
                         Hit gloshit;
                         refcolor += TraceRay(glosray, gloshit, bounce_count+1);
-                        RayTree::AddReflectedSegment(glosray, 0, gloshit.getT());
                     }
                     refcolor *= (1.0/args->num_glossy_samples);
                 } else {

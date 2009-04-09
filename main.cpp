@@ -1,21 +1,9 @@
 #include <stdio.h>
 
 #include "argparser.h"
-#include "glCanvas.h"
 #include "mesh.h"
-#include "radiosity.h"
 #include "raytracer.h"
-
-// Included files for OpenGL Rendering
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <GLUT/glut.h>
-#else
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-#endif
+#include "camera.h"
 
 // =========================================
 // =========================================
@@ -27,19 +15,15 @@ int main(int argc, char *argv[]) {
   //srand((unsigned)time(0));
 
   ArgParser *args = new ArgParser(argc, argv);
-  glutInit(&argc, argv);
 
   Mesh *mesh = new Mesh();
   mesh->Load(args->input_file,args);
-  RayTracer *raytracer = new RayTracer(mesh,args);
-  Radiosity *radiosity = new Radiosity(mesh,args);
-  raytracer->setRadiosity(radiosity);
-  radiosity->setRayTracer(raytracer);
+  Vec3f up = Vec3f(0,1,0);
+  Camera *camera = new PerspectiveCamera(args->camera_position, args->poi, up, 20*3.14159/180.0);
+  RayTracer *raytracer = new RayTracer(mesh,args,camera);
 
-  GLCanvas glcanvas;
-  glcanvas.initialize(args,mesh,raytracer,radiosity); 
+  raytracer->TraceRays();
 
-  // well it never returns from the GLCanvas loop...
   delete args;
   return 0;
 }
