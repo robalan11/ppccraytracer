@@ -27,9 +27,9 @@ cygwin_lib: all
 
 # Cygwin with native Windows libraries
 cygwin_a: CC              = g++ -g -O3 -Wall -pedantic
-cygwin_a: INCLUDE_PATH    = -I/usr/include/w32api -I/usr/include/opengl
+cygwin_a: INCLUDE_PATH    = -I/usr/include/w32api
 cygwin_a: LIB_PATH        = -L/usr/lib/w32api
-cygwin_a: LIBS            = -lm -lopengl32 -lglu32 -lglut32 
+cygwin_a: LIBS            = -lm
 cygwin_a: all
 
 # Cygwin with X (probably software emulation)
@@ -46,7 +46,7 @@ osx: all
 
 # ===============================================================
 
-SRCS	= main.cpp matrix.cpp camera.cpp mesh.cpp edge.cpp face.cpp raytree.cpp raytracer.cpp sphere.cpp material.cpp image.cpp
+SRCS	= main.cpp matrix.cpp camera.cpp mesh.cpp edge.cpp face.cpp raytracer.cpp sphere.cpp material.cpp image.cpp
 OBJS	= $(SRCS:.cpp=.o)
 EXE	= render
 
