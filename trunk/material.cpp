@@ -2,8 +2,8 @@
 #include "utils.h"
 
 Material::~Material() {
-  if (hasTextureMap())
-    glDeleteTextures(1,&texture_id);
+  if (hasTextureMap());
+    //glDeleteTextures(1,&texture_id);
 }
 
 
@@ -31,7 +31,7 @@ const Vec3f Material::getDiffuseColor(double s, double t) const {
 
 GLuint Material::getTextureID() { 
   assert (hasTextureMap()); 
-
+/*
   // if this is the first time the texture is being used, we must
   // initialize it
   if (texture_id == 0)  {
@@ -55,7 +55,7 @@ GLuint Material::getTextureID() {
     gluBuild2DMipmaps( GL_TEXTURE_2D, 3, image.Width(), image.Height(),
 		       GL_RGB, GL_UNSIGNED_BYTE, image.getGLPixelData());
   }
-  
+*/
   return texture_id;
 }
 
