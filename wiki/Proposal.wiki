@@ -1,0 +1,8 @@
+#summary Initial MPI Ray Tracing Project Proposal
+#labels Phase-Requirements
+
+Our project will be converting an existing ray tracing implementation to MPI for use on the BG/L. We will be using MPI because the ray tracing problem is well suited to scaling across large numbers of processors. The use of a distributed memory system with a large number of processors available will give us the most flexibility and power for experimenting on our results. Because graphical rendering on the BG/L isn't an option, we will be converting the existing code to use file output.
+
+The ray tracing algorithm is by its nature strongly scaling, as each ray within the algorithm is calculated separately. There are still quite a few areas that we could potentially focus on to tune our code. The first area will be efficient division of work. Ideally we want to avoid a clustering of extremely simple rays on some processors while leaving the majority of the complex rays being traced on a relatively small number of others. There are also additional optimizations to the ray tracing algorithm itself that we might potentially explore.
+
+Scaling the complexity of rays in a ray trace problem gives us an excellent way to increase the amount of local work to each processor in the system. This will be our primary method of testing the performance of our implementation. Also, we may look in to increasing the number of rays and complexity of the ray trace layout to put further stress on our workload distribution methods.
