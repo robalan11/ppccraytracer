@@ -18,8 +18,9 @@ void RayTracer::TraceRays() {
     char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
     sprintf(filename, "out%04d.ppm", processor_number);
     output.open(filename);
-    output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
-    cout << "Calculation complete.  Outputting file..." << endl;
+    if (processor_number == 0) {
+        output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
+    }
     for (int i = 0; i < num_pixels * 3; i++) {
         sprintf(buffer + i*4, "%03d\n", int(image[i]));
     }
