@@ -418,11 +418,7 @@ mesh.o: mesh.cpp /usr/include/stdio.h /usr/include/_ansi.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/istream.tcc \
   /usr/include/math.h bag.h utils.h boundingbox.h edge.h vertex.h face.h \
   ray.h hit.h /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/float.h \
-  argparser.h material.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/gl.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glu.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glut.h \
-  image.h vertex_parent.h sphere.h
+  argparser.h material.h image.h vertex_parent.h sphere.h
 edge.o: edge.cpp vertex.h /usr/include/assert.h /usr/include/_ansi.h \
   /usr/include/newlib.h /usr/include/sys/config.h \
   /usr/include/machine/ieeefp.h /usr/include/cygwin/config.h vectors.h \
@@ -627,11 +623,7 @@ face.o: face.cpp face.h edge.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/istream.tcc \
   /usr/include/math.h ray.h hit.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/float.h argparser.h utils.h \
-  material.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/gl.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glu.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glut.h \
-  image.h matrix.h
+  material.h image.h matrix.h
 raytracer.o: raytracer.cpp raytracer.h /usr/include/assert.h \
   /usr/include/_ansi.h /usr/include/newlib.h /usr/include/sys/config.h \
   /usr/include/machine/ieeefp.h /usr/include/cygwin/config.h argparser.h \
@@ -740,12 +732,8 @@ raytracer.o: raytracer.cpp raytracer.h /usr/include/assert.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_vector.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_bvector.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/vector.tcc \
-  material.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/gl.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glu.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glut.h \
-  image.h mesh.h bag.h boundingbox.h face.h edge.h vertex.h sphere.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/fstream \
+  material.h image.h mesh.h bag.h boundingbox.h face.h edge.h vertex.h \
+  sphere.h /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/fstream \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/i686-pc-cygwin/bits/basic_file.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/fstream.tcc
 sphere.o: sphere.cpp sphere.h vectors.h \
@@ -850,11 +838,8 @@ sphere.o: sphere.cpp sphere.h vectors.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/typeinfo \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/istream \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/istream.tcc \
-  /usr/include/math.h material.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/gl.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glu.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glut.h \
-  ray.h hit.h /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/float.h image.h \
+  /usr/include/math.h material.h ray.h hit.h \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/float.h image.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/vector \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_vector.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_bvector.h \
@@ -936,9 +921,6 @@ material.o: material.cpp material.h /usr/include/assert.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_heap.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_tempbuf.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/basic_string.tcc \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/gl.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glu.h \
-  /usr/lib/gcc/i686-pc-cygwin/3.4.4/../../../../include/w32api/GL/glut.h \
   vectors.h /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/iostream \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/ostream \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/ios \
