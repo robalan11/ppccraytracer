@@ -13,7 +13,7 @@ default:
 unix: CC                = g++ -g -O3 -Wall -pedantic
 unix: INCLUDE_PATH      = -I/usr/X11R6/include -L/usr/local/include
 unix: LIB_PATH          = -L/usr/X11R6/lib -L/usr/local/lib
-unix: LIBS              = -lm -lGL -lGLU -lglut
+unix: LIBS              = -lm
 unix: all
 
 # Cygwin with native Windows libraries, using .lib files from vstudio and glut download
