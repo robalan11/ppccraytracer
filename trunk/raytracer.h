@@ -8,6 +8,7 @@
 #include "camera.h"
 
 #include <vector>
+#include <math.h>
 
 class Mesh;
 class ArgParser;
@@ -20,12 +21,15 @@ class RayTracer {
 public:
 
   // CONSTRUCTOR & DESTRUCTOR
-  RayTracer(Mesh *m, ArgParser *a, Camera *c) {
+  RayTracer(Mesh *m, ArgParser *a, Camera *c, int npes, int myrank) {
     mesh = m;
     args = a;
     camera = c;
-    raytracing_x = 0.5;
-    raytracing_y = 0.5;
+    processor_number = myrank;
+    num_pixels = int(ceil((args->width * args->height) / float(npes)));
+    start_pixel = num_pixels * myrank;
+    raytracing_x = 0.5 + start_pixel % args->width;
+    raytracing_y = 0.5 + start_pixel / args->width;
     raytracing_skip = 1;
     image = (double*)malloc(args->width * args->height * 3 * sizeof(double));
   }  
@@ -52,6 +56,9 @@ private:
   double raytracing_x;
   double raytracing_y;
   int raytracing_skip;
+  int start_pixel;
+  int processor_number;
+  int num_pixels;
   double* image;
 };
 

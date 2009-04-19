@@ -9,10 +9,10 @@ main.o: main.cpp /usr/include/stdio.h /usr/include/_ansi.h \
   /usr/include/sys/features.h /usr/include/cygwin/types.h \
   /usr/include/sys/sysmacros.h /usr/include/stdint.h \
   /usr/include/endian.h /usr/include/sys/stdio.h /usr/include/sys/cdefs.h \
-  argparser.h /usr/include/string.h /usr/include/sys/string.h \
-  /usr/include/assert.h /usr/include/stdlib.h \
-  /usr/include/machine/stdlib.h /usr/include/alloca.h \
-  /usr/include/cygwin/stdlib.h /usr/include/cygwin/wait.h vectors.h \
+  /usr/include/stdlib.h /usr/include/machine/stdlib.h \
+  /usr/include/alloca.h /usr/include/cygwin/stdlib.h \
+  /usr/include/cygwin/wait.h argparser.h /usr/include/string.h \
+  /usr/include/sys/string.h /usr/include/assert.h vectors.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/iostream \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/i686-pc-cygwin/bits/c++config.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/i686-pc-cygwin/bits/os_defines.h \
@@ -50,7 +50,7 @@ main.o: main.cpp /usr/include/stdio.h /usr/include/_ansi.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/syslimits.h \
   /usr/include/limits.h /usr/include/features.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/cstdlib \
-  /usr/include/stdlib.h /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/new \
+  /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/new \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_pair.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/type_traits.h \
   /usr/lib/gcc/i686-pc-cygwin/3.4.4/include/c++/bits/stl_iterator_base_types.h \
