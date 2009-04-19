@@ -29,9 +29,9 @@ const Vec3f Material::getDiffuseColor(double s, double t) const {
   return Vec3f(r,g,b);
 }
 
-GLuint Material::getTextureID() { 
+/*GLuint Material::getTextureID() { 
   assert (hasTextureMap()); 
-/*
+
   // if this is the first time the texture is being used, we must
   // initialize it
   if (texture_id == 0)  {
@@ -55,9 +55,9 @@ GLuint Material::getTextureID() {
     gluBuild2DMipmaps( GL_TEXTURE_2D, 3, image.Width(), image.Height(),
 		       GL_RGB, GL_UNSIGNED_BYTE, image.getGLPixelData());
   }
-*/
+
   return texture_id;
-}
+}*/
 
 
 void Material::ComputeAverageTextureColor() {
