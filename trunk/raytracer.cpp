@@ -15,7 +15,7 @@ void RayTracer::TraceRays() {
     while(DrawPixel()) ;
     ofstream output;
     char* filename = (char*)malloc(16*sizeof(char));
-    char* buffer = (char*)malloc(num_pixels * 3 * 3 * sizeof(char));
+    char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
     sprintf(filename, "out%04d.ppm", processor_number);
     output.open(filename);
     output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
