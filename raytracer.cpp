@@ -14,12 +14,19 @@
 void RayTracer::TraceRays() {
     while(DrawPixel()) ;
     ofstream output;
-    output.open("out.ppm");
+    char* filename = (char*)malloc(16*sizeof(char));
+    char* buffer = (char*)malloc(num_pixels * 3 * 3 * sizeof(char));
+    sprintf(filename, "out%04d.ppm", processor_number);
+    output.open(filename);
     output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     cout << "Calculation complete.  Outputting file..." << endl;
-    for (int i = 0; i < args->width * args->height * 3 - 1; i++) {
-        output << image[i] << endl;
+    for (int i = 0; i < num_pixels * 3; i++) {
+        sprintf(buffer + i*4, "%03d\n", int(image[i]));
     }
+    output << buffer;
+    output.close();
+    free(filename);
+    free(buffer);
 }
 
 Vec3f RayTracer::SetupRay(double i, double j) {
@@ -50,8 +57,8 @@ int RayTracer::DrawPixel() {
 
   // compute the color and position of intersection
   Vec3f color = SetupRay(raytracing_x, raytracing_y);
-  int x = raytracing_x - 0.5;
-  int y = raytracing_y - 0.5;
+  int x = int(raytracing_x - 0.5);
+  int y = int(raytracing_y - 0.5);
   image[3*x + 3*args->width*(args->height-y-1) + 0] = color.x()*255;
   image[3*x + 3*args->width*(args->height-y-1) + 1] = color.y()*255;
   image[3*x + 3*args->width*(args->height-y-1) + 2] = color.z()*255;
