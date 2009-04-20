@@ -7,7 +7,16 @@ SHELL = /bin/bash
 # ===============================================================
 
 default:
-	@echo "Please specify a target (unix, cygwin_lib, cygwin_a, cygwin_x, or osx)"
+	@echo "Please specify a target (bgfen, unix, cygwin_lib, cygwin_a, cygwin_x, or osx)"
+
+# BlueGene
+bgfen: CC               = /opt/ibmcmp/vacpp/bg/8.0/bin/blrts_xlC -g -O3 -qstrict -qarch=440 -qtune=440
+bgfen: BGL_PATH         = /bgl/BlueLight/ppcfloor/bglsys
+bgfen: INCLUDE_PATH     = -I$(BGL_PATH)/include
+bgfen: LIB_PATH         = -L$(BGL_PATH)/lib
+# LIBS_MPI = $(LIB_PATH) -lmpich.rts -lmsglayer.rts -lrts.rts -ldevices.rts # I assume we'll need this later. BH
+bgfen: LIBS             = -lm
+bgfen: all
 
 # Linux or FreeBSD
 unix: CC                = g++ -g -O3 -Wall -pedantic
