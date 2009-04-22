@@ -6,13 +6,20 @@
 #include "mesh.h"
 #include "face.h"
 #include "sphere.h"
+#include "rdtsc.h"
 
 #include "math.h"
 #include <iostream>
 #include <fstream>
 
-void RayTracer::TraceRays() {
+unsigned long long RayTracer::TraceRays() {
+    unsigned long long start_time, end_time, total_time;
+//    cout << "Node " << processor_number << " number of pixels: " << num_pixels << endl;
+//    cout << "Node " << processor_number << " start pixel: " << start_pixel << endl;
+    start_time = rdtsc();
     while(DrawPixel()) ;
+    end_time = rdtsc();
+    total_time = end_time - start_time;
     ofstream output;
     char* filename = (char*)malloc(16*sizeof(char));
     char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
@@ -21,13 +28,14 @@ void RayTracer::TraceRays() {
     if (processor_number == 0) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
-    for (int i = 0; i < num_pixels * 3; i++) {
+    for (int i = 0; i <  num_pixels * 3; i++) {
         sprintf(buffer + i*4, "%03d\n", int(image[i]));
     }
     output << buffer;
     output.close();
     free(filename);
     free(buffer);
+    return total_time;
 }
 
 Vec3f RayTracer::SetupRay(double i, double j) {
