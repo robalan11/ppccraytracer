@@ -27,7 +27,7 @@ public:
     camera = c;
     processor_number = myrank;
     num_pixels = int(ceil((args->width * args->height) / float(npes)));
-    start_pixel = num_pixels * myrank;
+    start_pixel = num_pixels * processor_number;
     raytracing_x = 0.5 + start_pixel % args->width;
     raytracing_y = 0.5 + start_pixel / args->width;
     raytracing_skip = 1;
@@ -35,7 +35,7 @@ public:
   }  
   ~RayTracer() {}
   
-  void TraceRays();
+  unsigned long long TraceRays();
   Vec3f SetupRay(double i, double j);
   int DrawPixel();
   

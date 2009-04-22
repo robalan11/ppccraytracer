@@ -10,7 +10,8 @@ default:
 	@echo "Please specify a target (bgfen, unix, cygwin_lib, cygwin_a, cygwin_x, or osx)"
 
 # BlueGene
-bgfen: CC               = /opt/ibmcmp/vacpp/bg/8.0/bin/blrts_xlC -g -O3 -qstrict -qarch=440 -qtune=440
+
+bgfen: CC               = mpixlcxx -g -O3 -qstrict -qarch=440 -qtune=440 -DMPICH_IGNORE_CXX_SEEK
 bgfen: BGL_PATH         = /bgl/BlueLight/ppcfloor/bglsys
 bgfen: INCLUDE_PATH     = -I$(BGL_PATH)/include
 bgfen: LIB_PATH         = -L$(BGL_PATH)/lib
