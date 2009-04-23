@@ -28,7 +28,7 @@ unsigned long long RayTracer::TraceRays() {
     if (processor_number == 0) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
-    for (int i = 0; i <  num_pixels * 3; i++) {
+    for (int i = start_pixel; i <  num_pixels * 3; i++) {
         sprintf(buffer + i*4, "%03d\n", int(image[i]));
     }
     output << buffer;
@@ -57,12 +57,11 @@ int RayTracer::DrawPixel() {
   }
   int pos = int(raytracing_y-0.5)*args->width + int(raytracing_x-0.5);
   if (pos - start_pixel > num_pixels) {
-    if (raytracing_skip == 1) return 0;
-    raytracing_skip = raytracing_skip / 2;
-    if (raytracing_skip % 2 == 0) raytracing_skip++;
-    assert (raytracing_skip >= 1);
-    raytracing_x = raytracing_skip/2;
-    raytracing_y = raytracing_skip/2;
+    return 0;
+  }
+  if (raytracing_y > args->height)
+    num_pixels = pos - start_pixel;
+    return 0;
   }
 
   // compute the color and position of intersection
