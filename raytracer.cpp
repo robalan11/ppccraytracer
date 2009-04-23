@@ -55,7 +55,8 @@ int RayTracer::DrawPixel() {
     raytracing_x = raytracing_skip/2;
     raytracing_y += raytracing_skip;
   }
-  if (raytracing_y > args->height) {
+  int pos = int(raytracing_y-0.5)*args->width + int(raytracing_x-0.5);
+  if (pos - start_pixel > num_pixels) {
     if (raytracing_skip == 1) return 0;
     raytracing_skip = raytracing_skip / 2;
     if (raytracing_skip % 2 == 0) raytracing_skip++;
