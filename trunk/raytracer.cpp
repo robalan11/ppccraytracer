@@ -59,7 +59,7 @@ int RayTracer::DrawPixel() {
   if (pos - start_pixel > num_pixels) {
     return 0;
   }
-  if (raytracing_y > args->height)
+  if (raytracing_y > args->height) {
     num_pixels = pos - start_pixel;
     return 0;
   }
