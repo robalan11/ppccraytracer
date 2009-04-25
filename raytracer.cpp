@@ -23,7 +23,7 @@ unsigned long long RayTracer::TraceRays() {
     ofstream output;
     char* filename = (char*)malloc(16*sizeof(char));
     char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
-    sprintf(filename, "out%04d.ppm", processor_number);
+    sprintf(filename, "out%04d.ppm", num_processors-processor_number);
     output.open(filename);
     if (processor_number == num_processors-1) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
