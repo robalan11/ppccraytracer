@@ -14,8 +14,8 @@
 
 unsigned long long RayTracer::TraceRays() {
     unsigned long long start_time, end_time, total_time;
-    cout << "Node " << processor_number << " number of pixels: " << num_pixels << endl;
-    cout << "Node " << processor_number << " start pixel: " << start_pixel << endl;
+    //cout << "Node " << processor_number << " number of pixels: " << num_pixels << endl;
+    //cout << "Node " << processor_number << " start pixel: " << start_pixel << endl;
     start_time = rdtsc();
     while(DrawPixel()) ;
     end_time = rdtsc();
@@ -28,8 +28,9 @@ unsigned long long RayTracer::TraceRays() {
     if (processor_number == num_processors-1) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
+    cout << "Start: " << (args->width*args->height-start_pixel-num_pixels)*3 << "\nEnd: " << (args->width*args->height-start_pixel)*3 << endl;
     for (int i = (args->width*args->height-start_pixel-num_pixels)*3; i < (args->width*args->height-start_pixel)*3; i++) {
-        sprintf(buffer + (i-((args->width*args->height)-start_pixel)*3)*4, "%03d\n", int(image[i]));
+        sprintf(buffer + (i-((args->width*args->height)-start_pixel-num_pixels)*3)*4, "%03d\n", int(image[i]));
     }
     output << buffer;
     output.close();
