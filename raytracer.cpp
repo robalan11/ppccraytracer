@@ -22,12 +22,13 @@ unsigned long long RayTracer::TraceRays() {
     total_time = end_time - start_time;
     ofstream output;
     char* filename = (char*)malloc(16*sizeof(char));
-    char* buffer = (char*)malloc(args->width * 3 * 4 * sizeof(char));
+    char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
     sprintf(filename, "out%04d.ppm", processor_number);
     output.open(filename);
     if (processor_number == 0) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
+    cout << "JFASKDJFA" << endl;
     for (int i = start_pixel; i <  num_pixels * 3; i++) {
         sprintf(buffer + (i-start_pixel)*4, "%03d\n", int(image[i]));
     }
