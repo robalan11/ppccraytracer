@@ -14,8 +14,8 @@
 
 unsigned long long RayTracer::TraceRays() {
     unsigned long long start_time, end_time, total_time;
-//    cout << "Node " << processor_number << " number of pixels: " << num_pixels << endl;
-//    cout << "Node " << processor_number << " start pixel: " << start_pixel << endl;
+    cout << "Node " << processor_number << " number of pixels: " << num_pixels << endl;
+    cout << "Node " << processor_number << " start pixel: " << start_pixel << endl;
     start_time = rdtsc();
     while(DrawPixel()) ;
     end_time = rdtsc();
@@ -25,12 +25,11 @@ unsigned long long RayTracer::TraceRays() {
     char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
     sprintf(filename, "out%04d.ppm", processor_number);
     output.open(filename);
-    if (processor_number == 0) {
+    if (processor_number == num_processors-1) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
-    cout << "JFASKDJFA" << endl;
-    for (int i = start_pixel; i <  num_pixels * 3; i++) {
-        sprintf(buffer + (i-start_pixel)*4, "%03d\n", int(image[i]));
+    for (int i = (args->width*args->height-start_pixel-num_pixels)*3; i < (args->width*args->height-start_pixel)*3; i++) {
+        sprintf(buffer + (i-((args->width*args->height)-start_pixel)*3)*4, "%03d\n", int(image[i]));
     }
     output << buffer;
     output.close();

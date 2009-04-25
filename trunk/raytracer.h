@@ -26,6 +26,7 @@ public:
     args = a;
     camera = c;
     processor_number = myrank;
+    num_processors = npes;
     num_pixels = int(ceil((args->width * args->height) / float(npes)));
     start_pixel = num_pixels * processor_number;
     raytracing_x = 0.5 + start_pixel % args->width;
@@ -59,6 +60,7 @@ private:
   int start_pixel;
   int processor_number;
   int num_pixels;
+  int num_processors;
   double* image;
 };
 
