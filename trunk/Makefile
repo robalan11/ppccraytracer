@@ -20,7 +20,7 @@ bgfen: LIBS             = -lm
 bgfen: all
 
 # Linux or FreeBSD
-unix: CC                = g++ -g -O3 -Wall -pedantic
+unix: CC                = mpicxx -g -O3
 unix: INCLUDE_PATH      = -I/usr/X11R6/include -L/usr/local/include
 unix: LIB_PATH          = -L/usr/X11R6/lib -L/usr/local/lib
 unix: LIBS              = -lm
