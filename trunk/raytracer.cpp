@@ -28,7 +28,7 @@ unsigned long long RayTracer::TraceRays() {
     if (processor_number == num_processors-1) {
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
     }
-    cout << "Start: " << (args->width*args->height-start_pixel-num_pixels)*3 << "\nEnd: " << (args->width*args->height-start_pixel)*3 << endl;
+    //cout << "Start: " << (args->width*args->height-start_pixel-num_pixels)*3 << "\nEnd: " << (args->width*args->height-start_pixel)*3 << endl;
     for (int i = (args->width*args->height-start_pixel-num_pixels)*3; i < (args->width*args->height-start_pixel)*3; i++) {
         sprintf(buffer + (i-((args->width*args->height)-start_pixel-num_pixels)*3)*4, "%03d\n", int(image[i]));
     }
