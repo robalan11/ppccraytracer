@@ -20,22 +20,18 @@ unsigned long long RayTracer::TraceRays() {
     while(DrawPixel()) ;
     end_time = rdtsc();
     total_time = end_time - start_time;
-    ofstream output;
-    char* filename = (char*)malloc(16*sizeof(char));
-    char* buffer = (char*)malloc(num_pixels * 3 * 4 * sizeof(char));
-    sprintf(filename, "out%04d.ppm", num_processors-processor_number);
-    output.open(filename);
-    if (processor_number == num_processors-1) {
+    if (processor_number == 0) {
+        ofstream output;
+        char* buffer = (char*)malloc(args->width * args->height * 3 * 4 * sizeof(char));
+        output.open("output.ppm");
         output << "P3" << endl << args->width << " " << args->height << endl << "255" << endl;
+        for (int i = 0; i < args->width*args->height*3; i++) {
+            sprintf(buffer + i*4, "%03d\n", int(image[i]));
+        }
+        output << buffer;
+        output.close();
+        free(buffer);
     }
-    //cout << "Start: " << (args->width*args->height-start_pixel-num_pixels)*3 << "\nEnd: " << (args->width*args->height-start_pixel)*3 << endl;
-    for (int i = (args->width*args->height-start_pixel-num_pixels)*3; i < (args->width*args->height-start_pixel)*3; i++) {
-        sprintf(buffer + (i-((args->width*args->height)-start_pixel-num_pixels)*3)*4, "%03d\n", int(image[i]));
-    }
-    output << buffer;
-    output.close();
-    free(filename);
-    free(buffer);
     return total_time;
 }
 
@@ -53,15 +49,11 @@ Vec3f RayTracer::SetupRay(double i, double j) {
 
 int RayTracer::DrawPixel() {
   if (raytracing_x > args->width) {
-    raytracing_x = raytracing_skip/2;
-    raytracing_y += raytracing_skip;
-  }
-  int pos = int(raytracing_y-0.5)*args->width + int(raytracing_x-0.5);
-  if (pos - start_pixel > num_pixels) {
-    return 0;
+    raytracing_y += int(raytracing_x-0.5) / args->width;
+    raytracing_x = int(raytracing_x-0.5) % args->width + 0.5;
+    cout << raytracing_y << endl;
   }
   if (raytracing_y > args->height) {
-    num_pixels = pos - start_pixel;
     return 0;
   }
 
@@ -72,7 +64,7 @@ int RayTracer::DrawPixel() {
   image[3*x + 3*args->width*(args->height-y-1) + 0] = color.x()*255;
   image[3*x + 3*args->width*(args->height-y-1) + 1] = color.y()*255;
   image[3*x + 3*args->width*(args->height-y-1) + 2] = color.z()*255;
-  raytracing_x += raytracing_skip;
+  raytracing_x += num_processors;
   return 1;
 }
 

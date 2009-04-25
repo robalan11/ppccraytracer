@@ -27,10 +27,12 @@ public:
     camera = c;
     processor_number = myrank;
     num_processors = npes;
-    num_pixels = int(ceil((args->width * args->height) / float(npes)));
+    /*num_pixels = int(ceil((args->width * args->height) / float(npes)));
     start_pixel = num_pixels * processor_number;
     raytracing_x = 0.5 + start_pixel % args->width;
-    raytracing_y = 0.5 + start_pixel / args->width;
+    raytracing_y = 0.5 + start_pixel / args->width;*/
+    raytracing_x = 0.5 + processor_number;
+    raytracing_y = 0.5;
     raytracing_skip = 1;
     image = (double*)malloc(args->width * args->height * 3 * sizeof(double));
   }  
