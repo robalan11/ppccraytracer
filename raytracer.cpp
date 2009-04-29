@@ -51,7 +51,6 @@ int RayTracer::DrawPixel() {
   if (raytracing_x > args->width) {
     raytracing_y += int(raytracing_x-0.5) / args->width;
     raytracing_x = int(raytracing_x-0.5) % args->width + 0.5;
-    cout << raytracing_y << endl;
   }
   if (raytracing_y > args->height) {
     return 0;
